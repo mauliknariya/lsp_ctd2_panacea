@@ -7,4 +7,4 @@ Data files for this project are on Synapse
 3. RNAseq perturbations (11 cells, 30 drugs)
 
 For more details visit:
-[link text itself]: https://www.synapse.org/#!Synapse:syn21763589/wiki/601659
+https://www.synapse.org/#!Synapse:syn21763589/wiki/601659

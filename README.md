@@ -1,4 +1,4 @@
-#H1
+
 Code base for the CTD-squared Pancancer Chemosensitivity DREAM Challenge
 
 Data files for this project are on Synapse

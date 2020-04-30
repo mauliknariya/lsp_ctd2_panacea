@@ -1,5 +1,5 @@
 
-Code base for the CTD-squared Pancancer Chemosensitivity DREAM Challenge
+# CTD-squared Pancancer Chemosensitivity DREAM Challenge
 
 Data files for this project are on Synapse
 1. Baseline RNAseq CCLE (515 cells)

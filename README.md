@@ -1,5 +1,5 @@
 
-# CTD2 Pancancer Chemosensitivity DREAM Challenge
+# CTD<sup>2</sup> Pancancer Chemosensitivity DREAM Challenge
 
 Data files include:
 1. Baseline RNAseq CCLE (515 cells)

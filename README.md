@@ -2,9 +2,13 @@
 # CTD<sup>2</sup> Pancancer Chemosensitivity DREAM Challenge
 
 Data files include:
-1. Baseline RNAseq CCLE (515 cells)
-2. Baseline shRNAseq ACHILLES (515 cells)
-3. RNAseq perturbations (11 cells, 30 drugs)
+| Data                 | Cells/coumpunds       | SynapseID                                                  |
+| ---------------------|:---------------------:| ----------------------------------------------------------:|
+| CCLE RNAseq          | 515 cells             |[syn21822697](https://www.synapse.org/#!Synapse:syn21822697)|
+| ACHILLES shRNA       | 515 cells             |[syn21822699](https://www.synapse.org/#!Synapse:syn21822699)|
+| RNAseq perturbation  | 11 cells, 30 compounds|[syn21901840](https://www.synapse.org/#!Synapse:syn21901840)|
+| Perturbation combined| 11 cells, 30 compounds|[syn21996637](https://www.synapse.org/#!Synapse:syn21996637)|
+| Perturbation metadta | 11 cells, 30 compounds|[syn21996505](https://www.synapse.org/#!Synapse:syn21996505)|
 
 For more details visit:
 https://www.synapse.org/#!Synapse:syn21763589/wiki/601659

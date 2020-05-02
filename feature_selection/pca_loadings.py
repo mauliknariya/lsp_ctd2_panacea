@@ -1,19 +1,24 @@
 import pandas as pd
 import numpy as np
 from sklearn.decomposition import PCA
-import synapseclient
 
 
-def pca_loadings(synid, cutoff_score=0.5):
+def pca_loadings(df, cutoff_score=0.5):
     '''
+    Selects "high variqance features" by looking at their correlations with the
+    prinicpal components
+
     Parameters:
     -----------
+    df: pandas DataFrame, shape=(n_features, n_samples)
+        Input dataframe, features names as rows (also row indices), samples as columns
+    cutoff_score: float default=0.5
+        cut-off for the correlation between the feature and principal components
+    Returns:
+    --------
+    features: list, type: str
+        features with high correlation witht the principal components
     '''
-    syn = synapseclient.Synapse()
-    username, password = open('/Users/mauliknariya/synapse_login.txt')\
-                        .read().splitlines()
-    syn.login(username, password)
-    df = pd.read_csv(open(syn.get(synid).path), index_col=0)
     df = df.dropna()
     X = df.T.values
     n_components = min(df.shape[0], df.shape[1])

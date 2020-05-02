@@ -5,6 +5,10 @@ import synapseclient
 
 
 def pca_loadings(synid, cutoff_score=0.5):
+    '''
+    Parameters:
+    -----------
+    '''
     syn = synapseclient.Synapse()
     username, password = open('/Users/mauliknariya/synapse_login.txt')\
                         .read().splitlines()

@@ -20,6 +20,10 @@ dir.create(rd, showWarnings = FALSE)
 syn <- synDownloader(NULL)
 ```
 
+# PANACEA drug-perturbed RNAseq
+
+This is the main pertubation training data
+
 
 ```{r}
 raw <- syn("syn21901840")
@@ -74,7 +78,6 @@ write_csv(
 
 
 ```{r}
-
 activity <- synapser::Activity(
   used = "syn21901840",
   executed = "https://github.com/clemenshug/ctd-squared-lsp/blob/master/wrangling/01-pertubation_data.Rmd"
@@ -92,5 +95,84 @@ c(
   file.path(wd, "pertubation_meta.csv")
 ) %>%
   synStoreMany(parentId = syn_wrangled, activity = activity)
+```
+
+# PANACEA drug-perturbed RNAseq from Pancancer Drug Activity DREAM Challenge
+
+This is validation dataset with 32 additional compounds, no overlap with
+training data and the withheld challenge data
+
+
+```{r}
+raw <- syn("syn21990044")
+unzip(raw, exdir = file.path(rd, "pertubation_validation"))
+
+pertubation_df_raw <- list.files(file.path(rd, "pertubation_validation", "rnaseq"), full.names = TRUE) %>%
+  set_names(
+    basename(.) %>%
+    str_split(fixed("-")) %>%
+      map_chr(1)
+  ) %>%
+  map(read_csv) %>%
+  enframe("cell_line", "data")
+
+meta <- pertubation_df_raw %>%
+  transmute(
+    cell_line,
+    sample_id = map(data, colnames)
+  ) %>%
+  unchop(sample_id) %>%
+  filter(sample_id != "X1") %>%
+  vctrs::vec_cbind(
+    extracted = str_match(
+      .[["sample_id"]],
+      "^([[:alnum:]]+)_([\\d\\.]+)_(\\d+)_([[:alnum:]]+)_?(\\d*)$"
+    ) %>%
+      as_tibble(.name_repair = "universal")
+  ) %>%
+  mutate(
+    compound = extracted[["...2"]],
+    concentration = as.double(extracted[["...3"]]),
+    timepoint = as.integer(extracted[["...4"]]),
+    replicate = as.integer(extracted[["...6"]])
+  ) %>%
+  select(-extracted)
+
+pertubation_df <- pertubation_df_raw %>%
+  pull(data) %>%
+  reduce(full_join, by = "X1") %>%
+  rename(hgnc_gene_symbol = X1)
+
+write_csv(
+  pertubation_df,
+  file.path(wd, "pertubation_validation_rsem_counts.csv.gz")
+)
+
+write_csv(
+  meta,
+  file.path(wd, "pertubation_validation_meta.csv")
+)
 
 ```
+
+
+```{r}
+activity <- synapser::Activity(
+  used = "syn21990044",
+  executed = "https://github.com/clemenshug/ctd-squared-lsp/blob/master/wrangling/01-pertubation_data.Rmd"
+)
+
+syn_wrangled <- synapser::Folder(
+  "wrangled",
+  parent = base_syn
+) %>%
+  synapser::synStore() %>%
+  chuck("properties", "id")
+
+c(
+  file.path(wd, "pertubation_validation_rsem_counts.csv.gz"),
+  file.path(wd, "pertubation_validation_meta.csv")
+) %>%
+  synStoreMany(parentId = syn_wrangled, activity = activity)
+```
+

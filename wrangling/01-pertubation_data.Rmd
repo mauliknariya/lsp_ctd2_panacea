@@ -1,0 +1,96 @@
+---
+title: "Wrangling pertubation data"
+output: html_notebook
+---
+
+```{r setup}
+library(tidyverse)
+library(synExtra)
+library(here)
+
+synapser::synLogin()
+
+base_syn <- "syn22008714"
+
+wd <- here("wrangled")
+dir.create(wd, showWarnings = FALSE)
+rd <- here("raw")
+dir.create(rd, showWarnings = FALSE)
+
+syn <- synDownloader(NULL)
+```
+
+
+```{r}
+raw <- syn("syn21901840")
+unzip(raw, exdir = file.path(rd, "pertubation"))
+
+pertubation_df_raw <- list.files(file.path(rd, "pertubation"), full.names = TRUE) %>%
+  set_names(
+    basename(.) %>%
+    str_split(fixed("-")) %>%
+      map_chr(1)
+  ) %>%
+  map(read_csv) %>%
+  enframe("cell_line", "data")
+
+meta <- pertubation_df_raw %>%
+  transmute(
+    cell_line,
+    sample_id = map(data, colnames)
+  ) %>%
+  unchop(sample_id) %>%
+  filter(sample_id != "hgnc_symbol") %>%
+  vctrs::vec_cbind(
+    extracted = str_match(
+      .[["sample_id"]],
+      "^(cmpd_[[:alpha:]]+)_([\\d\\.]+)_(\\d+)_([[:alnum:]]+)_(\\d+)$"
+    ) %>%
+      as_tibble(.name_repair = "universal")
+  ) %>%
+  mutate(
+    compound = extracted[["...2"]],
+    concentration = as.double(extracted[["...3"]]),
+    timepoint = as.integer(extracted[["...4"]]),
+    replicate = as.integer(extracted[["...6"]])
+  ) %>%
+  select(-extracted)
+
+pertubation_df <- pertubation_df_raw %>%
+  pull(data) %>%
+  reduce(full_join, by = "hgnc_symbol")
+
+write_csv(
+  pertubation_df,
+  file.path(wd, "pertubation_rsem_counts.csv.gz")
+)
+
+write_csv(
+  meta,
+  file.path(wd, "pertubation_meta.csv")
+)
+
+```
+
+
+```{r}
+
+activity <- synapser::Activity(
+  used = "syn21901840",
+  executed = "https://github.com/clemenshug/ctd-squared-lsp/blob/master/wrangling/01-pertubation_data.Rmd"
+)
+
+syn_wrangled <- synapser::Folder(
+  "wrangled",
+  parent = base_syn
+) %>%
+  synapser::synStore() %>%
+  chuck("properties", "id")
+
+c(
+  file.path(wd, "pertubation_rsem_counts.csv.gz"),
+  file.path(wd, "pertubation_meta.csv")
+) %>%
+  synStoreMany(parentId = syn_wrangled, activity = activity)
+
+```

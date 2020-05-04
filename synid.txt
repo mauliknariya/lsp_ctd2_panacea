@@ -1,5 +1,0 @@
-Filename                            SynID           Description
-data_achilles_shRNA_DREAMv2.csv     syn21822699     ACHILLES baseline shRNA data 
-data_ccle_RNAseq_DREAMv2.csv        syn21822697     CCLE baseline RNAseq data
-rnaseq_perturbations.csv            syn21996637     RNAseq perturbations data
-rnaseq_perturbations_metadata.csv   syn21996505     RNAseq perturbations metadata (columns information)    

@@ -10,7 +10,7 @@ library(here)
 
 synapser::synLogin()
 
-base_syn <- "syn22008714"
+base_syn <- "syn21996275"
 
 wd <- here("wrangled")
 dir.create(wd, showWarnings = FALSE)
@@ -80,11 +80,11 @@ write_csv(
 ```{r}
 activity <- synapser::Activity(
   used = "syn21901840",
-  executed = "https://github.com/clemenshug/ctd-squared-lsp/blob/master/wrangling/01-pertubation_data.Rmd"
+  executed = "https://github.com/mauliknariya/lsp_ctd2_panacea/blob/master/wrangling/01-pertubation_data.Rmd"
 )
 
 syn_wrangled <- synapser::Folder(
-  "wrangled",
+  "Data",
   parent = base_syn
 ) %>%
   synapser::synStore() %>%
@@ -159,11 +159,11 @@ write_csv(
 ```{r}
 activity <- synapser::Activity(
   used = "syn21990044",
-  executed = "https://github.com/clemenshug/ctd-squared-lsp/blob/master/wrangling/01-pertubation_data.Rmd"
+  executed = "https://github.com/mauliknariya/lsp_ctd2_panacea/blob/master/wrangling/01-pertubation_data.Rmd"
 )
 
 syn_wrangled <- synapser::Folder(
-  "wrangled",
+  "Data",
   parent = base_syn
 ) %>%
   synapser::synStore() %>%
@@ -175,4 +175,3 @@ c(
 ) %>%
   synStoreMany(parentId = syn_wrangled, activity = activity)
 ```
-

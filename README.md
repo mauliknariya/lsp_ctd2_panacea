@@ -2,14 +2,16 @@
 # CTD<sup>2</sup> Pancancer Chemosensitivity DREAM Challenge
 
 Data files include:
-| Data                 | Cells/coumpunds       | SynapseID                                                  |
-| ---------------------|:---------------------:| ----------------------------------------------------------:|
-| CCLE RNAseq          | 515 cells             |[syn21822697](https://www.synapse.org/#!Synapse:syn21822697)|
-| ACHILLES shRNA       | 515 cells             |[syn21822699](https://www.synapse.org/#!Synapse:syn21822699)|
-| RNAseq perturbation  | 11 cells, 30 compounds|[syn21901840](https://www.synapse.org/#!Synapse:syn21901840)|
-| Perturbation combined| 11 cells, 30 compounds|[syn21996637](https://www.synapse.org/#!Synapse:syn21996637)|
-| Perturbation metadata| 11 cells, 30 compounds|[syn21996505](https://www.synapse.org/#!Synapse:syn21996505)|
-
+| Data                      | Cells/coumpunds       | SynapseID                                                  |
+| --------------------------|:---------------------:| ----------------------------------------------------------:|
+| CCLE RNAseq               | 515 cells             |[syn21822697](https://www.synapse.org/#!Synapse:syn21822697)|
+| ACHILLES shRNA            | 515 cells             |[syn21822699](https://www.synapse.org/#!Synapse:syn21822699)|
+| RNAseq perturbation       | 11 cells, 30 compounds|[syn21901840](https://www.synapse.org/#!Synapse:syn21901840)|
+| Perturbation combined     | 11 cells, 30 compounds|[syn21996637](https://www.synapse.org/#!Synapse:syn21996637)|
+| Perturbation metadata     | 11 cells, 30 compounds|[syn21996505](https://www.synapse.org/#!Synapse:syn21996505)|
+| RNAseq perturbation 2019  |9 cells, 32 compounds  |[syn22050894](https://www.synapse.org/#!Synapse:syn22050894)|
+| Perturbation 2019 metadata|9 cells, 32 compounds  |[syn22051003](https://www.synapse.org/#!Synapse:syn22051003)|
+| GDSC fitted dose response |1796 cells, 537 drugs  |[syn22051024](https://www.synapse.org/#!Synapse:syn22051024)|
 For more details visit:
 https://www.synapse.org/#!Synapse:syn21763589/wiki/601659
 

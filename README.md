@@ -3,7 +3,7 @@
 
 Data files include:
 | Data                      | Cells/coumpunds       | SynapseID                                                  |
-| --------------------------|:---------------------:| ----------------------------------------------------------:|
+|:-------------------------:|:---------------------:|:----------------------------------------------------------:|
 | CCLE RNAseq               | 515 cells             |[syn21822697](https://www.synapse.org/#!Synapse:syn21822697)|
 | ACHILLES shRNA            | 515 cells             |[syn21822699](https://www.synapse.org/#!Synapse:syn21822699)|
 | RNAseq perturbation       | 11 cells, 30 compounds|[syn21901840](https://www.synapse.org/#!Synapse:syn21901840)|

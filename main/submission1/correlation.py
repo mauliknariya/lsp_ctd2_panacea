@@ -25,9 +25,9 @@ def gdsc_ccle(drug):
     username, password = open('/Users/mauliknariya/synapse_login.txt').\
                         read().splitlines()
     syn.login(username, password, silent=True)
-    dfgdsc = pd.read_csv(open(syn.get('syn22051024').path))
+    dfgdsc = pd.read_csv(syn.get('syn22051024').path)
     dfgdsc['IC50'] = dfgdsc['LN_IC50'].apply(lambda x: np.exp(x))
-    dfccle = pd.read_csv(open(syn.get('syn21822697').path), index_col=0)
+    dfccle = pd.read_csv(syn.get('syn21822697').path, index_col=0)
     dfccle = dfccle.groupby(dfccle.index).mean()
     dfic50 = dfgdsc[dfgdsc.DRUG_NAME==drug][['CELL_LINE_NAME', 'IC50']]
     dfic50.index = dfic50.CELL_LINE_NAME
